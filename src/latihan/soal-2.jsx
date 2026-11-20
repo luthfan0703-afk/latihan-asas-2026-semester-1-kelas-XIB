@@ -10,22 +10,26 @@
   4. Ubah label pada tombol aksi menjadi "Batal" jika selesai bernilai true, atau "Selesai" jika false menggunakan Ternary Operator (? :).
 */
 
-function TaskItem() {
+function TaskItem({ judul, prioritas, selesai }) {
   return (
     <div className="p-4 rounded-xl border border-gray-200 bg-white shadow-sm flex items-center justify-between gap-4">
       <div>
-        {/* Tampilkan badge hanya jika prioritas === "tinggi" dan belum selesai */}
-        <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">
-          PERLU PERHATIAN
-        </span>
-
-        {/* Terapkan efek coret dinamis berdasarkan status selesai */}
-        <h3 className="text-base font-semibold text-gray-800 mt-1">Judul Tugas</h3>
+        {prioritas === "tinggi" && !selesai && (
+          <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">
+            PERLU PERHATIAN
+          </span>
+        )}
+        <h3
+          className={`text-base font-semibold text-gray-800 mt-1 ${
+            selesai ? "text-gray-400" : "text-gray-800"
+          }`}
+        >
+          {judul}
+        </h3>
       </div>
 
-      {/* Ubah label tombol berdasarkan status selesai */}
       <button className="px-3 py-1.5 rounded-lg text-sm font-medium bg-indigo-600 text-white">
-        Aksi
+        {selesai ? "batal" : "selesai"}
       </button>
     </div>
   );
